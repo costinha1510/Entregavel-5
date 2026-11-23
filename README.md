@@ -1,64 +1,147 @@
-# DriveGo
+# 🚗 DriveGo — Sistema de Gestão de Locadora de Veículos
 
-Sistema web administrativo para locadora de veículos, feito com HTML, CSS, JavaScript, Node.js, Express e SQLite. O painel oferece cadastros de veículos e clientes, gestão de locações, busca e indicadores. Não são carregados registros de demonstração: o banco começa vazio.
+O **DriveGo** é uma aplicação web desenvolvida para facilitar o gerenciamento de uma locadora de veículos. O sistema permite organizar veículos, clientes e locações em uma interface intuitiva, moderna e de fácil utilização.
 
-## Requisitos
+A aplicação está publicada na nuvem por meio do **Microsoft Azure**, permitindo seu acesso pela internet.
 
-- Node.js 22.13 ou superior (usa o módulo SQLite nativo `node:sqlite`).
-- npm.
+<p align="center">
+  <a href="https://drivego-locadora-seunome-bxdsdqbqdadgcuay.brazilsouth-01.azurewebsites.net/">
+    <strong>🌐 ACESSAR DRIVEGO ONLINE</strong>
+  </a>
+</p>
 
-## Executar localmente
+---
 
-Na pasta do projeto:
+## 📌 Demonstração
+
+**Aplicação em produção:**  
+https://drivego-locadora-seunome-bxdsdqbqdadgcuay.brazilsouth-01.azurewebsites.net/
+
+**Repositório GitHub:**  
+https://github.com/costinha1510/Entregavel-5
+
+---
+
+## ✨ Funcionalidades
+
+O DriveGo oferece funcionalidades para o gerenciamento das principais operações de uma locadora:
+
+- 🚘 **Gerenciamento de veículos:** cadastro e organização dos veículos disponíveis.
+- 👥 **Gerenciamento de clientes:** registro e consulta de informações dos clientes.
+- 📋 **Gerenciamento de locações:** controle dos registros de locação.
+- 📊 **Painel de controle:** interface para acompanhar e administrar as informações do sistema.
+- 💾 **Armazenamento de dados:** utilização do banco de dados SQLite.
+- ☁️ **Hospedagem em nuvem:** aplicação disponível publicamente por meio do Microsoft Azure.
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+| Tecnologia | Finalidade |
+|---|---|
+| HTML5 | Estrutura da aplicação |
+| CSS3 | Estilização e layout |
+| JavaScript | Interatividade e funcionalidades |
+| Node.js | Ambiente de execução do servidor |
+| Express.js | Desenvolvimento do backend e rotas |
+| SQLite | Banco de dados relacional |
+| Git e GitHub | Versionamento e armazenamento do código |
+| GitHub Actions | Automação da implantação |
+| Microsoft Azure | Hospedagem da aplicação |
+
+---
+
+## ☁️ Hospedagem e implantação
+
+O projeto foi publicado utilizando o **Microsoft Azure App Service**, com ambiente Linux e runtime Node.js 22 LTS.
+
+A implantação foi configurada por meio do **GitHub Actions**, permitindo automatizar o processo de publicação.
+
+### Fluxo de implantação
+
+1. O código-fonte é enviado para o repositório GitHub.
+2. O GitHub Actions identifica as alterações na branch `main`.
+3. O fluxo de trabalho instala as dependências e prepara a aplicação.
+4. O projeto é enviado automaticamente para o Azure App Service.
+5. A aplicação fica disponível por meio de seu endereço público.
+
+---
+
+## 💻 Como executar o projeto localmente
+
+### Pré-requisitos
+
+- [Node.js 22 LTS](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- Editor de código de sua preferência (recomendado: Visual Studio Code).
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/costinha1510/Entregavel-5.git
+```
+
+### 2. Acessar a pasta do projeto
+
+```bash
+cd Entregavel-5
+```
+
+### 3. Instalar as dependências
 
 ```bash
 npm install
-npm run dev
 ```
 
-Acesse http://localhost:3000. `npm start` inicia o servidor sem reinicialização automática. O endpoint `GET /health` informa se o processo está respondendo.
-
-Os registros ficam em `data/drivego.sqlite`. Esse arquivo é criado automaticamente no primeiro início do servidor. Para apontar para outro arquivo, defina `DRIVEGO_DB_PATH` com o caminho completo antes de iniciar.
-
-## Funcionalidades
-
-- **Veículos:** criar, consultar, editar e remover; placa única; situação disponível ou manutenção.
-- **Clientes:** criar, consultar, editar e remover; documento único e validação básica de e-mail.
-- **Locações:** criar, consultar, editar status/datas e excluir; cálculo do total pelo valor diário; bloqueio de conflito de datas para um mesmo veículo; proteção contra exclusão de veículos e clientes vinculados.
-- **Painel:** totais do banco e últimas locações registradas.
-
-## Publicar no Azure App Service
-
-Crie um App Service **Linux** com runtime Node.js compatível com `engines` no `package.json` (Node.js 22.13 ou superior). Publique a raiz do projeto e habilite a automação de build da implantação para instalar as dependências com `npm install`. O script `npm start` inicia o servidor. O Express usa a porta fornecida em `PORT` e escuta em `0.0.0.0`, como o App Service espera.
-
-No Linux App Service, `HOME` aponta para `/home` e é armazenamento persistente. Como o App Service define `WEBSITE_SITE_NAME`, o banco é salvo em `/home/data/drivego.sqlite`; a pasta `data` é criada automaticamente. Também é possível configurar `DRIVEGO_DB_PATH=/home/data/drivego.sqlite` nas configurações da aplicação para deixar o caminho explícito. Mantenha o armazenamento do App Service habilitado para que `/home` persista entre reinicializações.
-
-### Preservar os dados locais
-
-O banco local está em `data/drivego.sqlite` e não é incluído no controle de versão. O backup deve ser feito pelo script abaixo; não copie apenas o arquivo `.sqlite` enquanto a aplicação estiver em uso. O mecanismo de backup do SQLite incorpora uma visão consistente do banco, inclusive transações confirmadas que ainda estejam no `drivego.sqlite-wal`, e produz um arquivo independente sem precisar transportar os arquivos `-wal` e `-shm`.
-
-Execute com Node.js 22.16 ou superior (a API `node:sqlite` usada pelo script foi adicionada nessa versão):
+### 4. Iniciar a aplicação
 
 ```bash
-node scripts/backup-sqlite.js
+npm start
 ```
 
-O script lê o banco em modo somente leitura e cria um arquivo novo em `backups/`. Pode-se informar outro destino, que não pode existir previamente:
+### 5. Acessar no navegador
 
-```bash
-node scripts/backup-sqlite.js /caminho/seguro/drivego-migracao.sqlite
+```text
+http://localhost:3000
 ```
 
-Se `DRIVEGO_DB_PATH` estiver definido, o script o usa como origem; caso contrário, usa `data/drivego.sqlite`. Ao final, imprime a contagem de registros por tabela, o resultado `integrity_check` e o SHA-256. Guarde o backup em local seguro: ele contém dados pessoais e a pasta `backups/` é ignorada pelo Git.
+---
 
-### Restaurar no Azure e validar
+## 📁 Estrutura do projeto
 
-1. Envie o arquivo `.sqlite` gerado para uma pasta temporária sob `/home/data` no App Service. Compare o SHA-256 enviado com o valor impresso pelo script (em Linux, `sha256sum arquivo.sqlite`). Não envie arquivos `drivego.sqlite-wal` nem `drivego.sqlite-shm` junto com esse backup independente.
-2. Pare o App Service antes da restauração. Se `/home/data/drivego.sqlite` já existir, preserve o arquivo e quaisquer `drivego.sqlite-wal`/`drivego.sqlite-shm` existentes com nomes de backup/quarentena; não os sobrescreva nem remova sem confirmar que a cópia está íntegra.
-3. Copie o backup validado para `/home/data/drivego.sqlite`, garantindo que o diretório exista. Inicie a aplicação depois da cópia. O código cria as tabelas ausentes sem apagar tabelas ou registros existentes.
-4. Confirme no log do script que `integrity_check` foi `ok` e anote as contagens. Após iniciar a aplicação, compare `veículos`, `clientes` e `locações` nas respectivas telas ou confira `GET /api/vehicles`, `GET /api/clients` e `GET /api/rentals`; os totais devem corresponder às contagens do backup. Confira também o painel e `GET /health`.
+A organização principal do projeto contempla:
 
-Não direcione tráfego para a aplicação até validar as contagens. Mantenha o backup e a cópia anterior do banco Azure até concluir a validação funcional.
+```text
+Entregavel-5/
+│
+├── public/             # Arquivos da interface web
+├── data/               # Banco de dados local
+├── scripts/            # Scripts auxiliares
+├── backups/            # Cópias de segurança locais
+├── server.js           # Servidor principal
+├── package.json        # Dependências e scripts
+├── README.md           # Documentação do projeto
+└── .gitignore          # Arquivos ignorados pelo Git
+```
 
-SQLite com WAL é apropriado para esta aplicação em uma instância. Não habilite escala horizontal com várias instâncias gravando no mesmo arquivo SQLite. Para instruções atualizadas de runtime e implantação, consulte [Configurar aplicativos Node.js no App Service](https://learn.microsoft.com/azure/app-service/configure-language-nodejs) e [referência de configurações do App Service](https://learn.microsoft.com/azure/app-service/reference-app-settings).
+---
 
+## 🎯 Objetivo do projeto
+
+O objetivo do DriveGo é desenvolver uma solução web para auxiliar na administração de uma locadora de veículos, aplicando conhecimentos de desenvolvimento web, integração entre frontend e backend, persistência de dados, versionamento de código e computação em nuvem.
+
+O projeto também demonstra a utilização de serviços de nuvem para disponibilização de aplicações web acessíveis pela internet.
+
+---
+
+## 👨‍💻 Desenvolvedor
+
+**Guilherme Costa**
+
+Projeto acadêmico desenvolvido com foco em desenvolvimento de sistemas e computação em nuvem.
+
+---
+
+<p align="center">
+  Desenvolvido com dedicação para o projeto DriveGo 🚗
+</p>
