@@ -4,10 +4,11 @@ const { DatabaseSync } = require('node:sqlite');
 
 function createDatabase() {
   const defaultPath = process.env.WEBSITE_SITE_NAME
-    ? path.join(process.env.HOME || '/home', 'data', 'drivego.sqlite')
+    ? '/home/data/drivego.sqlite'
     : path.join(__dirname, '..', 'data', 'drivego.sqlite');
-  const databasePath = process.env.DRIVEGO_DB_PATH || defaultPath;
+  const databasePath = path.resolve(process.env.DRIVEGO_DB_PATH || defaultPath);
   fs.mkdirSync(path.dirname(databasePath), { recursive: true });
+  console.log(`SQLite database: ${databasePath}`);
 
   const database = new DatabaseSync(databasePath);
   database.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');
