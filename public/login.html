@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d35">
+  <meta name="description" content="Acesse o painel administrativo da DriveGo.">
+  <title>Entrar | DriveGo</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/login.js" defer></script>
+</head>
+<body class="login-page">
+  <main class="login-layout">
+    <section class="login-brand-panel" aria-label="DriveGo">
+      <a class="login-brand" href="/" aria-label="DriveGo, página inicial">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 14 1.7-5.2A2.5 2.5 0 0 1 8.1 7h7.8a2.5 2.5 0 0 1 2.4 1.8L20 14v4a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4Zm2 0h12l-1.4-4.4a1 1 0 0 0-1-.6H8.4a1 1 0 0 0-1 .6L6 14Z"/></svg></span>
+        <span class="brand-name">drive<span>go</span></span>
+      </a>
+      <div class="login-promo">
+        <span class="login-kicker"><i></i> GESTÃO DE FROTAS</span>
+        <h1>Sua operação,<br>em movimento.</h1>
+        <p>Frota, clientes e locações organizados em um só lugar.</p>
+      </div>
+      <svg class="login-car-art" viewBox="0 0 500 220" role="img" aria-label="Ilustração de um carro"><ellipse cx="255" cy="184" rx="205" ry="17" fill="#09172b" opacity=".35"/><path d="m54 151 17-45c5-14 18-23 33-24l47-4 39-47c8-10 20-16 34-16h91c16 0 29 7 39 19l38 48 34 9c14 4 24 15 27 29l5 31c1 10-6 18-16 18H68c-10 0-17-9-14-18Z" fill="#63a5f5"/><path d="m166 77 31-37c6-7 14-11 24-11h39v50h-94Zm111-50h34c11 0 20 5 27 13l29 37H277V27Z" fill="#18365c"/><path d="M58 140h435M261 29v51" stroke="#4383ca" stroke-width="3"/><circle cx="137" cy="163" r="32" fill="#10213b" stroke="#8ebdfa" stroke-width="4"/><circle cx="137" cy="163" r="13" fill="#7794b7"/><circle cx="387" cy="163" r="32" fill="#10213b" stroke="#8ebdfa" stroke-width="4"/><circle cx="387" cy="163" r="13" fill="#7794b7"/><path d="M446 112h23c8 0 14 6 15 14l1 10h-34l-5-24Z" fill="#ffe6a4"/></svg>
+      <span class="login-panel-footer">DRIVEGO <i>·</i> SIMPLES, DO SEU JEITO</span>
+    </section>
+    <section class="login-form-panel">
+      <div class="login-form-wrap">
+        <span class="login-mobile-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 14 1.7-5.2A2.5 2.5 0 0 1 8.1 7h7.8a2.5 2.5 0 0 1 2.4 1.8L20 14v4a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4Zm2 0h12l-1.4-4.4a1 1 0 0 0-1-.6H8.4a1 1 0 0 0-1 .6L6 14Z"/></svg></span><span class="brand-name">drive<span>go</span></span></span>
+        <div class="login-heading"><span class="eyebrow">BEM-VINDO DE VOLTA</span><h2>Acesse sua conta</h2><p>Entre com seus dados para continuar.</p></div>
+        <form class="login-form" id="login-form">
+          <label class="login-field" for="email"><span>E-mail</span><span class="login-input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><input id="email" name="email" type="email" placeholder="voce@empresa.com.br" autocomplete="username" required></span></label>
+          <label class="login-field" for="password"><span>Senha</span><span class="login-input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="password" name="password" type="password" placeholder="Digite sua senha" autocomplete="current-password" required minlength="6"><button class="password-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button></span></label>
+          <div class="login-options"><label class="remember-option"><input type="checkbox" name="remember"><span>Manter conectado</span></label><a class="forgot-link" href="mailto:suporte@drivego.com.br?subject=Recuperar%20acesso">Esqueceu a senha?</a></div>
+          <button class="login-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+          <p class="login-notice" id="login-notice" role="status" aria-live="polite" hidden></p>
+        </form>
+        <p class="login-help">Precisa de ajuda? <a href="mailto:suporte@drivego.com.br">Fale com o suporte</a></p>
+      </div>
+      <footer class="login-legal">© 2026 DriveGo <span>·</span> Painel administrativo</footer>
+    </section>
+  </main>
+</body>
+</html>
