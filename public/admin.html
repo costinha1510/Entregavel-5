@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d35">
+  <title>Usuários | DriveGo</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/admin.js" defer></script>
+</head>
+<body class="admin-users-page">
+  <main class="admin-users-wrap">
+    <header class="admin-users-header">
+      <a class="brand" href="/"><span class="brand-mark">DG</span><span class="brand-name">drive<span>go</span></span></a>
+      <div><a href="/">Voltar ao painel</a><button class="logout-button" id="logout" type="button">Sair</button></div>
+    </header>
+    <section class="admin-users-heading">
+      <span class="eyebrow">ADMINISTRAÇÃO</span>
+      <h1>Gerenciar usuários</h1>
+      <p>Analise os cadastros e aprove quem poderá acessar o DriveGo.</p>
+    </section>
+    <p class="admin-users-message" id="admin-message" role="status" aria-live="polite" hidden></p>
+    <section class="admin-users-panel">
+      <div class="admin-users-toolbar"><h2>Cadastros</h2><button class="secondary-button" id="refresh-users" type="button">Atualizar</button></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>NOME</th><th>E-MAIL</th><th>CADASTRADO EM</th><th>STATUS</th><th>AÇÕES</th></tr></thead>
+          <tbody id="users-list"><tr><td colspan="5">Carregando usuários…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

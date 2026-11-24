@@ -7,6 +7,7 @@
   <meta name="description" content="Acesse o painel administrativo da DriveGo.">
   <title>Entrar | DriveGo</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/login.js" defer></script>
 </head>
 <body class="login-page">
   <main class="login-layout">
@@ -26,11 +27,21 @@
     <section class="login-form-panel">
       <div class="login-form-wrap">
         <span class="login-mobile-brand"><span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 14 1.7-5.2A2.5 2.5 0 0 1 8.1 7h7.8a2.5 2.5 0 0 1 2.4 1.8L20 14v4a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4Zm2 0h12l-1.4-4.4a1 1 0 0 0-1-.6H8.4a1 1 0 0 0-1 .6L6 14Z"/></svg></span><span class="brand-name">drive<span>go</span></span></span>
-        <div class="login-heading"><span class="eyebrow">ACESSO SEGURO</span><h2>Entre ou crie sua conta</h2><p>Use seu email e senha. A Azure valida sua conta e libera o acesso.</p></div>
-        <div class="login-form">
-          <a class="login-submit" href="/.auth/login/aad?post_login_redirect_uri=%2Fapi%2Fauth%2Fcallback">Entrar ou criar conta <span aria-hidden="true">→</span></a>
-          <p class="login-notice" id="login-notice" role="status" aria-live="polite" hidden></p>
-        </div>
+        <div class="login-heading"><span class="eyebrow">ACESSO AO PAINEL</span><h2 id="form-title">Acesse sua conta</h2><p id="form-description">Entre com seu e-mail e senha para continuar.</p></div>
+        <form class="login-form" id="login-form">
+          <label class="login-field" for="email"><span>E-mail</span><span class="login-input-wrap"><input id="email" name="email" type="email" maxlength="254" autocomplete="email" required></span></label>
+          <label class="login-field" for="password"><span>Senha</span><span class="login-input-wrap"><input id="password" name="password" type="password" autocomplete="current-password" required></span></label>
+          <button class="login-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        </form>
+        <form class="login-form" id="register-form" hidden>
+          <label class="login-field" for="register-name"><span>Nome completo</span><span class="login-input-wrap"><input id="register-name" name="name" type="text" minlength="2" maxlength="120" autocomplete="name" required></span></label>
+          <label class="login-field" for="register-email"><span>E-mail</span><span class="login-input-wrap"><input id="register-email" name="email" type="email" maxlength="254" autocomplete="email" required></span></label>
+          <label class="login-field" for="register-password"><span>Senha</span><span class="login-input-wrap"><input id="register-password" name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></span></label>
+          <label class="login-field" for="confirm-password"><span>Confirmar senha</span><span class="login-input-wrap"><input id="confirm-password" name="confirmPassword" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></span></label>
+          <button class="login-submit" type="submit">Criar conta <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-notice" id="login-notice" role="status" aria-live="polite" hidden></p>
+        <p class="login-help" id="form-switch"><span id="switch-prompt">Ainda não tem uma conta?</span> <a href="#register" id="switch-link">Criar conta</a></p>
         <p class="login-help">Precisa de ajuda? <a href="mailto:suporte@drivego.com.br">Fale com o suporte</a></p>
       </div>
       <footer class="login-legal">© 2026 DriveGo <span>·</span> Painel administrativo</footer>

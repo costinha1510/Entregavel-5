@@ -2,7 +2,15 @@ const express = require('express');
 const path = require('node:path');
 const { createDatabase } = require('./src/database');
 const { createApiRouter } = require('./src/api');
-const { createAuthRouter, createSessionMiddleware, ensureAdminUser, requireAuthentication } = require('./src/auth');
+const {
+  createAdminRouter,
+  createAuthRouter,
+  createAuthenticationMiddleware,
+  createSessionMiddleware,
+  csrfProtection,
+  ensureAdminUser,
+  requireAdministrator,
+} = require('./src/auth');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,9 +32,15 @@ app.get('/login.html', (_request, response) => {
   response.sendFile(path.join(publicDirectory, 'login.html'));
 });
 app.get('/css/styles.css', (_request, response) => response.sendFile(path.join(publicDirectory, 'css', 'styles.css')));
+app.get('/js/login.js', (_request, response) => response.sendFile(path.join(publicDirectory, 'js', 'login.js')));
+app.use('/api', csrfProtection);
 app.use('/api/auth', createAuthRouter(database));
-app.use('/api/auth', requireAuthentication);
+const requireAuthentication = createAuthenticationMiddleware(database);
+app.use('/api/admin', requireAuthentication, requireAdministrator, createAdminRouter(database));
 app.use('/api', requireAuthentication, createApiRouter(database));
+app.get('/admin.html', requireAuthentication, requireAdministrator, (_request, response) => {
+  response.sendFile(path.join(publicDirectory, 'admin.html'));
+});
 app.use(requireAuthentication);
 app.use(express.static(publicDirectory));
 
