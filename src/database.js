@@ -43,6 +43,13 @@ function createDatabase() {
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       CHECK (end_date >= start_date)
     );
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY,
+      email TEXT NOT NULL UNIQUE COLLATE NOCASE,
+      password_hash TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT 'admin' CHECK (role IN ('admin')),
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
     CREATE INDEX IF NOT EXISTS rentals_vehicle_dates ON rentals(vehicle_id, start_date, end_date, status);
     CREATE INDEX IF NOT EXISTS rentals_client ON rentals(client_id);
   `);

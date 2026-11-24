@@ -69,6 +69,36 @@ A implantação foi configurada por meio do **GitHub Actions**, permitindo autom
 
 ## 💻 Como executar o projeto localmente
 
+### Configuração de autenticação
+
+Em produção, o cadastro e o login são feitos pelo **Microsoft Entra External ID**. A tela hospedada pela Microsoft valida o email e a senha; o DriveGo só libera o painel após receber a identidade confirmada do Azure App Service. A mesma tela permite criar conta ou entrar.
+
+No portal Azure:
+
+1. Crie um tenant externo do Microsoft Entra ID e um fluxo de usuário do tipo **Inscrever-se e entrar**, habilitando **Email com senha**.
+2. Registre o aplicativo no tenant e associe-o ao fluxo de usuário.
+3. No App Service, habilite **Autenticação** com o provedor Microsoft Entra e configure-o para usar o tenant externo. Cadastre `https://<seu-app>.azurewebsites.net/.auth/login/aad/callback` como URI de redirecionamento do aplicativo. Deixe solicitações não autenticadas permitidas para que a página de login do DriveGo possa abrir; o próprio servidor protege as páginas e APIs do painel.
+4. Em **Configuração > Variáveis de ambiente**, defina `AZURE_AUTH_ENABLED=true` e `SESSION_SECRET` com pelo menos 32 bytes aleatórios. Reinicie o App Service.
+
+Após o login Azure, o App Service retorna para `/api/auth/callback` e encaminha o principal autenticado no cabeçalho `X-MS-CLIENT-PRINCIPAL`. A aplicação guarda apenas a sessão do usuário; a senha é recebida e validada pelo Entra External ID.
+
+Para desenvolvimento local sem Azure, o login administrativo legado continua disponível e requer `ADMIN_EMAIL`, `ADMIN_PASSWORD` e `SESSION_SECRET`. Na primeira inicialização, ele cria a conta com senha armazenada em hash bcrypt.
+
+Gere uma chave de sessão aleatória e configure as variáveis antes de iniciar o servidor. Exemplo no PowerShell:
+
+```powershell
+$env:ADMIN_EMAIL = "admin@exemplo.com"
+$env:ADMIN_PASSWORD = "defina-uma-senha-forte-com-12-ou-mais-caracteres"
+$env:SESSION_SECRET = node -e "console.log(require('node:crypto').randomBytes(48).toString('base64url'))"
+npm start
+```
+
+Para gerar `SESSION_SECRET`, use `node -e "console.log(require('node:crypto').randomBytes(48).toString('base64url'))"`. Mantenha HTTPS habilitado. O banco configurado em `/home/data/drivego.sqlite` guarda as sessões e os emails de usuários autorizados junto aos dados atuais, sem alterar as tabelas da locadora.
+
+O acesso ao painel e à API exige sessão. `/login.html`, `/css/styles.css`, `/health` e o callback Azure ficam acessíveis sem sessão do DriveGo. Em ambiente local, o endpoint de login administrativo também fica disponível. Após entrar, use **Sair** no cabeçalho para encerrar a sessão do painel.
+
+`SESSION_SECRET` é obrigatório em todos os ambientes. Em produção/Azure, o cookie também recebe `Secure` e é enviado apenas por HTTPS; no servidor local HTTP, essa flag fica desligada para permitir o desenvolvimento local.
+
 ### Pré-requisitos
 
 - [Node.js 22 LTS](https://nodejs.org/)
