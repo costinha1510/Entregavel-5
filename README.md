@@ -113,7 +113,7 @@ Entregavel-5/
 ├── data/               # Banco de dados local
 ├── scripts/            # Scripts auxiliares
 ├── backups/            # Cópias de segurança locais
-├── docs/images/        # Prints usados na documentação
+├── github-readme/      # Pasta com os prints da documentação (docs/images)
 ├── tests/selenium/     # Testes automatizados com Selenium
 ├── server.js           # Servidor principal
 ├── package.json        # Dependências e scripts
